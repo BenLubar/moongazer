@@ -16,10 +16,12 @@ func FindBaseDir() (string, error) {
 	if err != nil {
 		return "", errors.Wrap(err, "cannot determine current user")
 	}
-	if runtime.GOOS == "windows" {
-		name := filepath.Join(u.HomeDir, "Saved Games", "moonquest", "steam", "saves")
-		if fi, err := os.Stat(name); err == nil && fi.IsDir() {
-			return filepath.Dir(name), nil
+	for _, distributor := range []string{"steam", "itch", "standalone"} {
+		if runtime.GOOS == "windows" {
+			name := filepath.Join(u.HomeDir, "Saved Games", "moonquest", distributor, "saves")
+			if fi, err := os.Stat(name); err == nil && fi.IsDir() {
+				return filepath.Dir(name), nil
+			}
 		}
 	}
 

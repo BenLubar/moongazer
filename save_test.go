@@ -24,11 +24,11 @@ func TestSaveReader(t *testing.T) {
 		t.Fatalf("failed to find base save directory: %v", err)
 	}
 	savesDir := filepath.Join(baseDir, "saves")
-	liveSaves, err := filepath.Glob(filepath.Join(savesDir, "28786.sav"))
+	liveSaves, err := filepath.Glob(filepath.Join(savesDir, "*.sav"))
 	if err != nil {
 		t.Errorf("failed to list live saves: %v", err)
 	}
-	backupSaves, err := filepath.Glob(filepath.Join(savesDir, "*.bak_"))
+	backupSaves, err := filepath.Glob(filepath.Join(savesDir, "*.bak"))
 	if err != nil {
 		t.Errorf("failed to list backup saves: %v", err)
 	}
